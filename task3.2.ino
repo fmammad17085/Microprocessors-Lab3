@@ -13,14 +13,14 @@ void setup() {
     "loop%=:           \n\t"
     "add %[sum], %[cnt]\n\t"   // sum += cnt
     "cp  %[cnt], %[limit]\n\t" // compare cnt with limit
-    "brne cont%=       \n\t"   // if cnt != limit → continue
-    "rjmp end%=        \n\t"   // else finished
+    "brne cont%=       \n\t"   // if cnt != limit → jump to cont
+    "rjmp end%=        \n\t"   // else jump to end
 
-    "cont%=:           \n\t"
+    "cont%=:           \n\t"   // if not equal, use this
     "inc %[cnt]        \n\t"   // cnt++
-    "rjmp loop%=       \n\t"   // repeat
+    "rjmp loop%=       \n\t"   // repeat (go back to start)
 
-    "end%=:            \n\t"
+    "end%=:            \n\t" // if equal, use this
     : [sum]   "=r"(sum),   // output: result of summation (1..10)
       [cnt]   "=r"(cnt),   // output: counter value at loop end
       [limit] "=r"(limit)  // output: limit value (10)
